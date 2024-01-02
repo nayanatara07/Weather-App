@@ -15,12 +15,16 @@ export const WeatherApp = () => {
 
     let api_key = "5bc55445217d47000757537c112fe465";
 
-    const search = () => {
+    const search = async () => {
         const element=document.getElementsByClassName("cityInput")
         if(element[0].value==="")
         {
           return 0;
         }
+        let url = `https://api.openweathermap.org/data/2.5/weather?q=${element[0].value}&units=Metric&APPID=${api_key}`;
+
+        let response = await fetch(url);
+        let data = await response.json();
     }
 
   return (
