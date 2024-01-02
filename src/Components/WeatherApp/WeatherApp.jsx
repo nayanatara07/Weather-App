@@ -29,6 +29,12 @@ export const WeatherApp = () => {
         const wind = document.getElementsByClassName("wind-rate");
         const temperature = document.getElementsByClassName("weather-temp");
         const location = document.getElementsByClassName("weather-location");
+
+        humidity[0].innerHTML = data.main.humidity;
+        wind[0].innerHTML = data.wind.speed;
+        temperature[0].innerHTML = data.main.temp;
+        location[0].innerHTML = data.name;
+
     }
 
   return (
