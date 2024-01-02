@@ -37,3 +37,19 @@ Before you begin, ensure you have the following installed:
    npm install
    ```
 
+### Usage
+
+1. **Start the application:**
+
+   ```bash
+   npm start
+   ```
+
+2. **Open your browser and go to [http://localhost:3000](http://localhost:3000) to view the application.**
+
+3. **Enter a city name in the search bar and click the search icon to get weather information.**
+
+## Dependencies
+
+- [React](https://reactjs.org/): A JavaScript library for building user interfaces.
+
