@@ -51,5 +51,5 @@ Before you begin, ensure you have the following installed:
 
 ## Dependencies
 
-- [React](https://reactjs.org/): A JavaScript library for building user interfaces.
+- [React](https://react.dev/): A JavaScript library for building user interfaces.
 
