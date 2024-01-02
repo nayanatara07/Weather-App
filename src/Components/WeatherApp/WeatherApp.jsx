@@ -25,6 +25,10 @@ export const WeatherApp = () => {
 
         let response = await fetch(url);
         let data = await response.json();
+        const humidity = document.getElementsByClassName("humidity-percent");
+        const wind = document.getElementsByClassName("wind-rate");
+        const temperature = document.getElementsByClassName("weather-temp");
+        const location = document.getElementsByClassName("weather-location");
     }
 
   return (
@@ -52,7 +56,7 @@ export const WeatherApp = () => {
         <div className="element">
           <img src={wind_icon} alt="" className="icon" />
           <div className="data">
-            <div className="humidity-percent">18 km/h</div>
+            <div className="wind-rate">18 km/h</div>
             <div className="text">Wind Speed</div>
           </div>
         </div>
