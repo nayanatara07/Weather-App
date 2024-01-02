@@ -2,7 +2,7 @@
   "name": "new-react-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://github.com/nayanatara07/weather-app",
+  "homepage": "nayanatara07.github.io./weather-app",
   "main":"index.js",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
