@@ -1,6 +1,6 @@
 # WeatherApp
 
-**WeatherApp** is a simple React application that provides current weather information based on user input.
+[WeatherApp](https://nayanatara07.github.io/weather-app/) is a simple React application that provides current weather information based on user input.
 
 ## Features
 
@@ -22,7 +22,7 @@ Before you begin, ensure you have the following installed:
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/your-username/WeatherApp.git
+   git clone https://github.com/nayanatara07/weather-app.git
    ```
 
 2. **Navigate to the project directory:**
