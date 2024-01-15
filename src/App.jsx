@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import "./App.css"
-import env from "./utils/validateEnv"
+import React, { useEffect, useState } from 'react';
+import "./App.css";
+import env from "./utils/validateEnv";
 import search_icon from "./assets/search.png";
 import clear_icon from "./assets/clear.png";
 import cloud_icon from "./assets/cloud.png";
@@ -10,30 +10,36 @@ import snow_icon from "./assets/snow.png";
 import wind_icon from "./assets/wind.png";
 import humidity_icon from "./assets/humidity.png";
 
+function WeatherElement({ icon, value, text }) {
+  return (
+    <div className={`element ${value ? "" : "hidden"}`}>
+      <img src={icon} alt="" className="icon" />
+      <div className="data">
+        <div className="data-value">{value}</div>
+        <div className="text">{text}</div>
+      </div>
+    </div>
+  );
+}
 
 function App() {
-  const [wicon, setWicon] = useState(cloud_icon);
+  const [weatherData, setWeatherData] = useState({
+    humidity: "",
+    wind: "",
+    temperature: "",
+    location: "",
+    weatherIcon: cloud_icon,
+  });
 
-  const search = async (e) => {
-    e.preventDefault(); // Prevents the default behavior of the Enter key
-    const element = document.getElementsByClassName("cityInput")
-    if (element[0].value === "")
-    {
-      return 0;
+
+  useEffect(() => {
+    async function currentLocation(myLocation) {
+      await fetchData(myLocation)
     }
-    let url = `https://api.openweathermap.org/data/2.5/weather?q=${element[0].value}&units=Metric&APPID=${env.REACT_APP_WEATHER_API}`;
+    currentLocation("hyderabad")
+  }, [])
 
-    let response = await fetch(url);
-    let data = await response.json();
-    const humidity = document.getElementsByClassName("humidity-percent");
-    const wind = document.getElementsByClassName("wind-rate");
-    const temperature = document.getElementsByClassName("weather-temp");
-    const location = document.getElementsByClassName("weather-location");
-
-    humidity[0].innerHTML = data.main.humidity + " %";
-    wind[0].innerHTML = Math.floor(data.wind.speed) + " km/h";
-    temperature[0].innerHTML = Math.floor(data.main.temp) + " ⁰c";
-    location[0].innerHTML = data.name;
+  const getWeatherIcon = (iconCode) => {
     const iconMappings = {
       "01d": clear_icon,
       "01n": clear_icon,
@@ -50,15 +56,44 @@ function App() {
       "13d": snow_icon,
       "13n": snow_icon,
     };
+    return iconMappings[iconCode] || clear_icon;
+  };
 
-    const getWeatherIcon = (iconCode) => {
-      return iconMappings[iconCode] || clear_icon;
-    };
+  const fetchData = async (city) => {
+    try
+    {
+      const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=Metric&APPID=${env.REACT_APP_WEATHER_API}`;
 
-    const iconCode = data.weather[0].icon;
-    const weatherIcon = getWeatherIcon(iconCode);
-    setWicon(weatherIcon);
-  }
+      const response = await fetch(url);
+      const data = await response.json();
+      console.log(data)
+      const { humidity, temp } = data.main
+      const { name, wind } = data
+      const { icon } = data.weather[0]
+      const weatherIcon = getWeatherIcon(icon);
+
+      setWeatherData({
+        humidity: `${humidity} %`,
+        wind: `${Math.floor(wind.speed)} km/h`,
+        temperature: `${Math.floor(temp)} ⁰c`,
+        location: name,
+        weatherIcon: weatherIcon,
+      });
+    } catch (error)
+    {
+      console.error("Error fetching weather data:", error);
+    }
+  };
+
+  const search = async (e) => {
+    e.preventDefault();
+    const element = document.getElementsByClassName("cityInput");
+    if (element[0].value === "")
+    {
+      return 0;
+    }
+    await fetchData(element[0].value);
+  };
 
   return (
     <div className='container'>
@@ -72,29 +107,29 @@ function App() {
           <img src={search_icon} alt="" />
         </button>
       </form>
-      <div className="weather-image">
-        <img src={wicon} alt="" />
-      </div>
-      <div className="weather-temp">24⁰c</div>
-      <div className="weather-location">London</div>
-      <div className="data-container">
-        <div className="element">
-          <img src={humidity_icon} alt="" className="icon" />
-          <div className="data">
-            <div className="humidity-percent">64%</div>
-            <div className="text">Humidity</div>
-          </div>
-        </div>
 
-        <div className="element">
-          <img src={wind_icon} alt="" className="icon" />
-          <div className="data">
-            <div className="wind-rate">18 km/h</div>
-            <div className="text">Wind Speed</div>
+      {weatherData && (
+        <>
+          <div className="weather-image">
+            <img src={weatherData.weatherIcon} alt="" />
           </div>
-        </div>
+          <div className="weather-temp">{weatherData.temperature}</div>
+          <div className="weather-location">{weatherData.location}</div>
 
-      </div>
+          <div className="data-container">
+            <WeatherElement
+              icon={humidity_icon}
+              value={weatherData.humidity}
+              text="Humidity"
+            />
+            <WeatherElement
+              icon={wind_icon}
+              value={weatherData.wind}
+              text="Wind Speed"
+            />
+          </div>
+        </>
+      )}
     </div>
   );
 }
