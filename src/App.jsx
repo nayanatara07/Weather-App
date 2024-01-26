@@ -97,6 +97,9 @@ function App() {
 
   return (
     <div className='container'>
+      <div className="heading">Meow Weather App</div>
+      <div className='body-content'>
+      
       <form className="top-bar">
         <input
           type="text"
@@ -130,7 +133,9 @@ function App() {
           </div>
         </>
       )}
+      </div>
     </div>
+
   );
 }
 
