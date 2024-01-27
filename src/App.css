@@ -8,12 +8,6 @@
 }
 
 .heading{
-  /* position: absolute; */
-  /* top: 20%; */
-  /* left: 50%; */
-  /* transform: translate(-50%, -50%); */
-  /* margin: 2rem auto; */
-  /* width: 90vw; */
   height: max-content;
   font-size: 3rem;
   font-weight: 900;
