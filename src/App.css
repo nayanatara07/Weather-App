@@ -20,12 +20,14 @@
   align-items: center;
   justify-content: space-around;
 }
+
 .body-content{
   border-radius: 12px;
   background-image: linear-gradient(180deg, #42047e 0%, #07f49e 100%);
   box-shadow: 10px 15px 10px rgba(0, 0, 0, 0.3);
   padding: 1em 0;
 }
+
 .container {
   position: absolute;
   top: 45%;
@@ -37,7 +39,8 @@
   padding: 2rem 0;
   display: flex;
   flex-direction: column;
-  gap: 3rem;
+  gap: 2rem;
+overflow-y: scroll;
   
 }
 
@@ -124,7 +127,13 @@
 }
 
 @media only screen and (min-width: 700px) {
-  .container, .heading {
+  .container {
     width: 40rem;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .heading {
+    display: none; 
   }
 }
