@@ -1,6 +1,6 @@
 # WeatherApp
 
-[WeatherApp](https://nayanatara07.github.io/weather-app/) is a simple React application that provides current weather information based on user input.
+[WeatherApp](https://meow-weather-app.vercel.app/) is a simple React application that provides current weather information based on user input.
 
 ## Features
 
